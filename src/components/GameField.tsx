@@ -1,14 +1,20 @@
 import {useState, useEffect} from "react"
 import Hole from "./Hole"
+import HoverElement from "./HoverElement"
 
-const GameField = () => {
+interface GameFieldData {
+  actualPlayer: string
+}
+
+
+const GameField = (props: GameFieldData) => {
   const [holes, setHoles] = useState<JSX.Element[]>([])
   const [hoverElement, setHoverElements] = useState<JSX.Element[]>([])
     useEffect(()=>{
         let newHoles = []
         let newHoverElements = []
         for(let row= 0; row < 7; row++){
-            newHoverElements.push(<div><div className="marker"></div></div>)
+            newHoverElements.push(<HoverElement actualPlayer={props.actualPlayer}/>)
             for(let column = 0; column<6; column++){
                 newHoles.push(<Hole player={ undefined } key={`${row}|${column}`}/>)
             }
@@ -28,5 +34,6 @@ const GameField = () => {
     </div>
   )
 }
+
 
 export default GameField

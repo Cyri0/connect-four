@@ -115,7 +115,6 @@ div{
   }
 
   .hover-area>div:hover{
-    background-color: rgba(211, 211, 211, 0.292);
     cursor: pointer;
   }
 
@@ -127,7 +126,6 @@ div{
     max-width: 25px;
     max-height: 25px;
 
-    background-color: red;
     position: absolute;
     left: 50%;
     transform: translate(-50%,-15px) rotate(45deg);
@@ -160,7 +158,6 @@ div{
     top: -2rem;
     position: absolute;
     border-radius: 50%;
-    background-color: red;
     border: 2px solid black
   }
 
