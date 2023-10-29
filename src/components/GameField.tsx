@@ -8,7 +8,7 @@ const GameField = () => {
         let newHoles = []
         let newHoverElements = []
         for(let row= 0; row < 7; row++){
-            newHoverElements.push(<HoverElement key={row}/>)
+            newHoverElements.push(<HoverElement key={row} id={row} />)
             for(let column = 0; column<6; column++){
                 newHoles.push(<div key={row + "|"+column} className="hole"></div>)
             }
