@@ -3,6 +3,8 @@ import GameField from './components/GameField'
 import PlayerCard from './components/PlayerCard'
 import { generateMatrix, GameFieldContext } from './context/GameFieldContext'
 import { PlayerContext } from './context/PlayerContext'
+import { winTest } from './calculations/winTest'
+
 
 export type Player = "player1" | "player2"
 
@@ -22,13 +24,9 @@ const App = () => {
     setGameFieldMatrix(newMatrix)
   }
 
-  useEffect(() => {
-    console.log('player changed to ' + actualPlayer)
-  }, [actualPlayer])
-
-
   useEffect(()=>{
-    matrix.forEach(line=> console.log(line))
+    winTest(matrix)
+
   }, [matrix])
 
 
