@@ -22,9 +22,6 @@ const HoverElement = (props: HoverElementProps) => {
             setCoins([<Coin key={coins.length + 1} player={ctx.actualPlayer}/>, ...coins])
 
             gfCtx.changeMatrix(props.id, ctx.actualPlayer == 'player1'? 1 : 2)
-
-
-            ctx.changePlayer()
         }
     }
 

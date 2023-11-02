@@ -29,5 +29,4 @@ const GameField = () => {
   )
 }
 
-
 export default GameField
