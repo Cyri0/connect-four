@@ -17,6 +17,9 @@ const App = () => {
   const [matrix, setGameFieldMatrix] = useState<number[][]>(generateMatrix())
   const [gameOver, setGameOver] = useState<boolean>(false)
 
+  const [isTie, setIsTie] = useState<boolean>(false)
+
+
   const changePlayer = () => {
     setActualPlayer(actualPlayer => actualPlayer == 'player1' ? 'player2' : 'player1')
   }
@@ -33,17 +36,23 @@ const App = () => {
 
   const startNewGame = () => {
     setGameFieldMatrix(generateMatrix())
-    if(actualPlayer == 'player1')
-    {
-      setPlayer1Point(player1Point => player1Point + 1)
-    }else{
-      setPlayer2Point(player2Point => player2Point + 1)
+    if (!isTie) {
+      if (actualPlayer == 'player1') {
+        setPlayer1Point(player1Point => player1Point + 1)
+      } else {
+        setPlayer2Point(player2Point => player2Point + 1)
+      }
     }
+    setIsTie(false)
   }
 
   useEffect(() => {
-    if (winTest(matrix)) {
+    let res = winTest(matrix)
+    if (res) {
       setGameOver(true)
+    } else if (res == null) {
+      setGameOver(true)
+      setIsTie(true)
     }
     else {
       changePlayer()
@@ -51,23 +60,23 @@ const App = () => {
   }, [matrix])
 
   return (
-    <NewGameContext.Provider value={{startNewGame}}>
-    <GameOverContext.Provider value={{changeGameOver}}>
-    <GameFieldContext.Provider value={{ matrix, changeMatrix }}>
-      <PlayerContext.Provider value={{ actualPlayer, changePlayer }}>
-        <div id="main-app">
-          {gameOver ? <GameOver /> :
-          <>
-          <PlayerCard smileyBg='player1' playerName='Player 1' point={player1Point} />
-          <GameField />
-          <PlayerCard smileyBg='player2' playerName='Player 2' point={player2Point} />
-          </>
-          }
+    <NewGameContext.Provider value={{ startNewGame }}>
+      <GameOverContext.Provider value={{ changeGameOver }}>
+        <GameFieldContext.Provider value={{ matrix, changeMatrix }}>
+          <PlayerContext.Provider value={{ actualPlayer, changePlayer }}>
+            <div id="main-app">
+              {gameOver ? <GameOver tie={isTie} /> :
+                <>
+                  <PlayerCard smileyBg='player1' playerName='Player 1' point={player1Point} />
+                  <GameField />
+                  <PlayerCard smileyBg='player2' playerName='Player 2' point={player2Point} />
+                </>
+              }
 
-        </div>
-      </PlayerContext.Provider>
-    </GameFieldContext.Provider>
-    </GameOverContext.Provider>
+            </div>
+          </PlayerContext.Provider>
+        </GameFieldContext.Provider>
+      </GameOverContext.Provider>
     </NewGameContext.Provider>
   )
 }

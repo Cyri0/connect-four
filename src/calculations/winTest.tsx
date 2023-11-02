@@ -23,9 +23,6 @@ const rowTest = (line: number[]): boolean => {
     
     let strippedLine = stripLine(line).reverse()
 
-    if(strippedLine.length > 0)
-        console.log(strippedLine)
-
     strippedLine.forEach(e => {
         if(e === sample && sample !== 0){
             counter++
@@ -102,10 +99,22 @@ const diagonalTest = (m: number[][]) => {
     return false
 }
 
-export const winTest = (m: number[][]): boolean => {
+const tieTest = (m:number[][]) => {
+    let tie = 6 * 7
+    let count = 0
+
+    m.forEach(l => {
+        count += l.length
+    })
+
+    return count === tie
+}
+
+export const winTest = (m: number[][]): boolean|null => {
     if(horizontalTest(m)) return true
     if(verticalTest(m)) return true
     if(diagonalTest(m)) return true
+    if(tieTest(m)) return null
 
     return false
 }
