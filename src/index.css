@@ -202,10 +202,18 @@ div{
   color: white;
 }
 
-
-
-
-
+.gameOver>button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+}
 
   @media screen and (max-width: 600px) {
 

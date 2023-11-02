@@ -20,18 +20,22 @@ const stripLine = (line: number[])=> {
 const rowTest = (line: number[]): boolean => {
     let counter: number = 0
     let sample: number = line.length > 0 ? line[0] : 0
+    
+    let strippedLine = stripLine(line).reverse()
 
-    line = stripLine(line)    
+    if(strippedLine.length > 0)
+        console.log(strippedLine)
 
-    line.forEach(e => {
+    strippedLine.forEach(e => {
         if(e === sample && sample !== 0){
             counter++
         }else if(e !== sample && e !== 0){
             sample = e
             counter = 1
+        }else{
+            counter = 0
         }
     })
-
 
     if (counter >= 4)
         return true
@@ -99,7 +103,9 @@ const diagonalTest = (m: number[][]) => {
 }
 
 export const winTest = (m: number[][]): boolean => {
-    return horizontalTest(m) || 
-    verticalTest(m) || 
-    diagonalTest(m)
+    if(horizontalTest(m)) return true
+    if(verticalTest(m)) return true
+    if(diagonalTest(m)) return true
+
+    return false
 }
